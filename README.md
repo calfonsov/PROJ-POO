@@ -123,7 +123,7 @@ Nuestro diagrama esta compuestos por distintas clases:
 
 ### Product (Clase base)
 Es la clase principal de donde salen los demás productos. Sus atributos son:
-- id
+- __id
 - nombre
 - categoría
 - costo
@@ -172,3 +172,23 @@ Sus métodos son:
 ### Archive and Reports
 Archive se encarga de guardar y cargar los datos del inventario. Mientras que Reports genera reportes con base en la información del inventario.
 Ambas depenten de la clase "Inventory"
+
+##Organización de Modulos y Paquetes:
+Así mismo, se espera al momento de programar el código, este se organice de la siguiente manera:
+```csv
+Sistema de Inventario de Farmacia
+│
+├── Product (clase base)
+│   ├── Medicine
+│   ├── Medical_Device
+│   ├── Care_Product
+│
+├── Inventory
+│   ├── Manages products and transactions
+│   ├── Calculates values, expiration dates, and low stock levels
+│   └── Generates reports
+│
+├── Movement
+├── Archive
+└── Reports
+```
