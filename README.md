@@ -173,7 +173,7 @@ Sus métodos son:
 Archive se encarga de guardar y cargar los datos del inventario. Mientras que Reports genera reportes con base en la información del inventario.
 Ambas depenten de la clase "Inventory"
 
-##Organización de Modulos y Paquetes:
+## Organización de Modulos y Paquetes:
 Así mismo, se espera al momento de programar el código, este se organice de la siguiente manera:
 ```csv
 Sistema de Inventario de Farmacia
