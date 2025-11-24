@@ -6,6 +6,8 @@ El sistema está diseñado para manejar diferentes tipos de productos, registrar
 
 ## Diagrama de clases
 
+.
+
 ```mermaid
 classDiagram
 direction TB
