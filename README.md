@@ -1,12 +1,55 @@
 # PROYECTO POO - EQUIPO ROCKET
+# Sistema de Inventario para Bodega de Farmacia  
+Proyecto Final – Programación Orientada a Objetos – Python
 
-## Sistema de gestión de inventario
-Este proyecto es una aplicación en Python que simula un sistema de gestión de inventario para la bodega de una farmacia. Permite registrar productos, controlar entradas y salidas, generar reportes y mantener un historial organizado de todos los movimientos.
+## Descripción General
+
+Este proyecto simula un **sistema de gestión de inventarios para una bodega de farmacia**, desarrollado en **Python** utilizando **Programación Orientada a Objetos (POO)**.
+Permite registrar productos, controlar entradas y salidas, generar reportes y mantener un historial organizado de todos los movimientos.
 El sistema está diseñado para manejar diferentes tipos de productos, registrar los movimientos del inventario y generar reportes.
 
-## Diagrama de clases
+El sistema permite:
+- Registrar productos de varias categorías (medicamentos, dispositivos médicos, productos de cuidado personal y venta libre).
+- Registrar entradas y salidas del inventario.
+- Consultar existencias, lotes, fechas de vencimiento y costos.
+- Manejar proveedores y usuarios del sistema.
+- Almacenar información de forma persistente mediante archivos **JSON**.
+- Generar reportes del inventario y movimientos.
+- Operar desde consola o desde una **GUI opcional en Tkinter**.
 
-.
+La solución fue diseñada para simular el funcionamiento real de una bodega de farmacia.
+
+---
+
+## Objetivo del Proyecto
+
+Desarrollar una aplicación modular, escalable y orientada a objetos que gestione eficientemente el inventario de medicamentos y productos farmacéuticos, cumpliendo con las especificaciones del curso y buenas prácticas de POO.
+
+---
+
+## Justificación y Enfoque de la Solución
+
+Para abordar el problema:
+1. Se analizaron los procesos de inventario reales de bodegas de farmacia.  
+2. Se clasificaron los productos según la industria farmacéutica:
+   - Medicamentos  
+   - Dispositivos médicos  
+   - Productos de cuidado personal  
+   - Productos de venta libre  
+3. Se modelaron las clases principales siguiendo principios de:
+   - **Abstracción**
+   - **Encapsulamiento**
+   - **Herencia**
+   - **Modularidad**
+4. Se estableció una estructura por paquetes para mantener el orden del proyecto.  
+5. Se incluyó persistencia en JSON para mantener toda la información almacenada.
+6. Se agregó una GUI opcional desarrollada con Tkinter para mejorar la interacción.
+
+---
+
+## Diagrama UML de Clases (Mermaid)
+
+El siguiente diagrama representa la arquitectura final del sistema:
 
 ```mermaid
 classDiagram
@@ -14,27 +57,30 @@ direction TB
     class Inventory {
 	    - products: dict[id : str]
 	    - movements: list
-	    + add_product() :
-	    + delete_product() :
-	    + register_entry() :
-	    + check_out() :
-	    + show_inventory() :
-	    + search_product() :
-	    + generate_report() :
-	    + product_category() :
+		- suppliers: list
+		- users: list
+	    + add_product():
+	    + delete_product():
+	    + register_entry():
+	    + check_out():
+	    + show_inventory():
+	    + search_product():
+	    + generate_report():
+	    + product_category():
     }
 
     class Movement {
-	    - id: int
+	    - id_movement: int
 	    - id_product: int
 	    - type: str
 	    - lot: int
 	    - date: datetime
-	    + __str__() :
+		- user: User
+	    + __str__():
     }
 
     class Product {
-	    - __id: int
+	    - __id_product: int
 	    - name: str
 	    - category: str
 	    - cost: float
@@ -43,12 +89,12 @@ direction TB
 	    - date_expiration: datetime | None
 	    - supplier: str
 	    + __str()__:
-	    + update_lot(lot:int) :
+	    + update_lot(lot:int):
 	    + total_cost() : -> float
     }
 
     class Medicine {
-	    - __id: str
+	    - __id_product: str
 	    - name: str
 	    - category: str
 	    - cost: float
@@ -62,12 +108,12 @@ direction TB
 	    - invima: str
 	    - prescription: bool
 	    + __str()__:
-	    + update_lot(lot:int) :
+	    + update_lot(lot:int):
 	    + total_cost() : -> float
     }
 
     class Medical_Device {
-	    - __id: int
+	    - __id_product: int
 	    - name: str
 	    - category: str
 	    - cost: float
@@ -79,12 +125,12 @@ direction TB
 	    - material: str
 	    - single_use: bool
 	    + __str() __:
-	    + update_lot(lot:int) :
+	    + update_lot(lot:int):
 	    + total_cost() : -> float
     }
 
     class Care_Product {
-	    - __id: int
+	    - __id_product: int
 	    - name: str
 	    - category: str
 	    - cost: float
@@ -95,102 +141,49 @@ direction TB
 	    - brand: str
 	    - dosage: float
 	    + __str() __:
-	    + update_lot(lot:int) :
+	    + update_lot(lot:int):
 	    + total_cost() : -> float
     }
 
     class Archive {
 	    - data_path: str
-	    + save_inventory() :
-	    + load_inventory() :
+	    + save_inventory():
+	    + load_inventory():
     }
 
     class Reports {
-	    + general_report() :
-	    + movement_report() :
-	    + category_report() :
+	    + general_report():
+	    + movement_report():
+	    + category_report():
     }
+
+	class User {
+		- __id_user: int
+		- name: str
+		- rol: str
+		- registration_date: datetime
+		+ __str()__:
+		+ registration_movement():
+		+ check_inventory():
+	}
+
+	class Supplier {
+		- __id_supplier: int
+		- name: str
+		- phone: int
+		- mail: str
+		- address: str
+		+ __str()__:
+		+ update_contact():
+	}
 
     Product <|-- Medicine
     Product <|-- Medical_Device
     Product <|-- Care_Product
+	User <|-- Supplier
     Inventory *-- Movement
     Inventory <-- Reports
     Inventory <-- Archive
 ```
 
-## ¿Cómo funciona?
-Nuestro diagrama esta compuestos por distintas clases:
 
-
-### Product (Clase base)
-Es la clase principal de donde salen los demás productos. Sus atributos son:
-- __id
-- nombre
-- categoría
-- costo
-- lote
-- proveedor
-- fecha de registro
-- fecha de vencimiento
-
-Sus metodos son:
-- update_lot(): para actualizar el lote
-- total_cost(): precio total del stock
-- str(): mostrarlo como texto
-
-Y sus tres clases hijas **(Herencia)*: 
-- Medicine
-- Medical_Device
-- Care_Product
-
-
-### Inventory (Clase base)
-Es la clase más importante porque maneja todo el sistema. Aquí se guardan:
-- Los productos (en un diccionario)
-- La lista de movimientos
-
-Sus metodos son:
-- **add_product()** = Agregar productos
-- **delete_product()** = Eliminar productos
-- **register_entry()** = Registrar entrada
-- **check_out()** = Registrar salida
-- **show_inventory()** = Mostrar inventario
-- **earch_product()** = Buscar producto
-- **generate_report()** = Genrar reporte
-- **product_category()** = Categoria de producto
-
-
-### Movement
-Guarda los cambios que le pasan a los productos. 
-Sus métodos son:
-- id
-- id del producto
-- tipo (entrada o salida)
-- lote afectado
-- fecha del movimiento
-
-
-### Archive and Reports
-Archive se encarga de guardar y cargar los datos del inventario. Mientras que Reports genera reportes con base en la información del inventario.
-Ambas depenten de la clase "Inventory"
-
-## Organización de Modulos y Paquetes:
-Así mismo, se espera al momento de programar el código, este se organice de la siguiente manera:
-```csv
-Sistema de Inventario de Farmacia
-│
-├── Product (clase base)
-│   ├── Medicine
-│   ├── Medical_Device
-│   ├── Care_Product
-│
-├── Inventory
-│   ├── Manages products and transactions
-│   ├── Calculates values, expiration dates, and low stock levels
-│   └── Generates reports
-│
-├── Movement
-├── Archive
-└── Reports
-```
