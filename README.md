@@ -186,4 +186,86 @@ direction TB
     Inventory <-- Archive
 ```
 
+---
+
+## Estructura
+
+La organización del proyecto sigue una arquitectura modular dividida por las responsabilidades de cada clase.
+
+```
+inventario_farmacia/
+│
+├── src/
+│   ├── productos/
+│   │   ├── producto.py
+│   │   ├── medicine.py
+│   │   ├── medical_device.py
+│   │   └── care_product.py
+│   │
+│   ├── gestion/
+│   │   ├── inventory.py
+│   │   ├── movement.py
+│   │   └── supplier.py
+│   │
+│   ├── usuarios/
+│   │   └── user.py
+│   │
+│   ├── persistencia/
+│   │   ├── archive.py
+│   │   └── json_manager.py  
+│   │
+│   ├── reportes/
+│   │   └── reports.py
+│   │
+│   ├── gui/
+│   │   ├── app.py
+│   │   └── ventanas.py
+│   │
+│   ├── utils/
+│   │   ├── fechas.py
+│   │   └── validaciones.py
+│   │
+│   └── main.py
+│
+├── data/
+│   ├── inventario.json
+│   ├── movimientos.json
+│   ├── proveedores.json
+│   └── usuarios.json
+│
+└── README.md
+```
+
+- **productos/:** contiene las clases del modelo base (Product) y sus subclases especializadas (Medicine, MedicalDevice, CareProduct). Aquí se aplica la herencia y el manejo de atributos propios de cada tipo de producto.
+
+- **gestion/:** agrupa el control del inventario (Inventory), el registro de movimientos (Movement) y la gestión de proveedores (Supplier).
+
+- **usuarios/:** define la clase User, que representa a los usuarios del sistema y sus acciones dentro del inventario.
+
+- **persistencia/:** maneja la lectura y escritura de datos en archivos JSON.
+
+- **reportes/:** genera informes basados en la información del inventario y los movimientos almacenados.
+
+- **gui/:** contiene la interfaz gráfica construida con Tkinter.
+
+- **utils/:** funciones auxiliares como validación de datos y manejo de fechas.
+
+- **main.py:** punto de entrada que inicia el sistema y conecta los módulos.
+
+- **data/:** almacena los archivos JSON donde persisten los productos, movimientos, proveedores y usuarios.
+
+
+
+---
+
+### Equipo Rocket
+
+- Integrantes:
+  
+  - Carol Tatiana Alfonso Valderrama
+  - Maria Fernanda Arias FLorez
+  - Juan Nicolá Gutiérrez Coral
+
+
+
 
