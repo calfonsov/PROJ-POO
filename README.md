@@ -1,4 +1,4 @@
-# PROYECTO POO - EQUIPO ROCKET
+ # PROYECTO POO - EQUIPO ROCKET
 # Sistema de Inventario para Bodega de Farmacia  
 Proyecto Final – Programación Orientada a Objetos – Python
 
