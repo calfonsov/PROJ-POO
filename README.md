@@ -254,7 +254,9 @@ inventario_farmacia/
 
 - **data/:** almacena los archivos JSON donde persisten los productos, movimientos, proveedores y usuarios.
 
+## Ejecución
 
+Para ejecutar el programa es necesario ejecutar el siguiente comando en la consola (python -m src.ui.app) 
 
 ---
 
